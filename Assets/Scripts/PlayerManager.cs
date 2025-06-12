@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿ using UnityEngine;
 using System.Collections;
 
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer playerSpriteRenderer;
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private UIManager uiManager;
 
     [Header("Movement Settings")]
     public float moveDistance = 5f; 
@@ -15,8 +16,28 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         Movement();
+        Arrow();
     }
 
+    public void Arrow()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            uiManager.ShowDirectionArrow(Direction.Up);
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            uiManager.ShowDirectionArrow(Direction.Down);
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            uiManager.ShowDirectionArrow(Direction.Left);
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            uiManager.ShowDirectionArrow(Direction.Right);
+        }
+    }
     //Handles player movement based on input
     private void Movement()
     {
