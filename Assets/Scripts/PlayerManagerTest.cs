@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManagerTest : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer playerSpriteRenderer;
     [SerializeField] private Animator playerAnimator;
