@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,6 +39,7 @@ public class MainPlayerManager : MonoBehaviour
 
 	/// <summary>
 	/// Handles movement on a grid: moves one unit per input if no obstacles ahead.
+	/// Xử lý chuyển động trên lưới: di chuyển một đơn vị cho mỗi lần nhập nếu không có chướng ngại vật phía trước.
 	/// </summary>
 	void HandleGridMovement()
 	{
