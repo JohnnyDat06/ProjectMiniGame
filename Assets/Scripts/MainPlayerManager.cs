@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 public class MainPlayerManager : MonoBehaviour
 {
@@ -80,7 +82,15 @@ public class MainPlayerManager : MonoBehaviour
 	/// </summary>
 	bool CanMove(Vector3 direction)
 	{
+		float distance = 1f;
+		Vector3 origin = transform.position;
+
 		RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 1f, obstacleLayer);
+
+		// 💡 Vẽ ray để debug trong Scene view
+		Color rayColor = hit.collider ? Color.red : Color.green;
+		Debug.DrawRay(origin, direction.normalized * distance, rayColor);
+
 		return hit.collider == null;
 	}
 
