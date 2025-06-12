@@ -6,10 +6,16 @@ using static UnityEngine.UI.Image;
 
 public class MainPlayerManager : MonoBehaviour
 {
-	public float movementSpeed = 5f;
-	public float climbSpeed = 3f;
-	public LayerMask obstacleLayer;
+	[SerializeField] private float movementSpeed = 5f;
+	[SerializeField] private float climbSpeed = 3f;
 
+	[SerializeField] private LayerMask obstacleLayer;
+	[SerializeField] private LayerMask terrainLayer;
+
+	[SerializeField] private Rigidbody2D playerRigidbody;
+	[SerializeField] private Collider2D playerCollider;
+
+	
 	private bool isMoving = false;
 	private Vector3 targetPosition;
 
@@ -28,6 +34,16 @@ public class MainPlayerManager : MonoBehaviour
 
 	void Update()
 	{
+		if (!IsGrounded())
+		{
+			Fall();
+			return; // không cho di chuyển nếu đang rơi
+		}
+		else
+		{
+			StickToGround();
+		}
+
 		switch (currentMovementMode)
 		{
 			case MovementMode.GridMove:
@@ -63,19 +79,58 @@ public class MainPlayerManager : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Handles ladder movement: smooth climbing up/down when inside ladder trigger.
+	/// Handles ladder movement: move 2 units per input press if there is a ladder above or below.
 	/// </summary>
 	void HandleLadderMovement()
 	{
+		if (isMoving) return;
+
 		float verticalInput = Input.GetAxisRaw("Vertical");
 
-		Vector3 direction = new Vector3(0, verticalInput, 0);
-
-		if (CanClimb(direction))
+		// Only proceed when there's an input
+		if (verticalInput != 0)
 		{
-			transform.position += direction * climbSpeed * Time.deltaTime;
+			Vector3 direction = new Vector3(0, verticalInput, 0);
+			Vector3 climbTarget = transform.position + direction * 2f;
+
+			// Use raycast to check if ladder exists 2 units ahead
+			if (CanClimb(direction))
+			{
+				targetPosition = climbTarget;
+				StartCoroutine(MoveToTargetPosition());
+			}
 		}
 	}
+
+	/// <summary>
+	/// Checks if player is grounded using BoxCast.
+	/// </summary>
+	private bool IsGrounded()
+	{
+		return Physics2D.BoxCast(playerCollider.bounds.center,playerCollider.bounds.size,0f,
+			Vector2.down,0.1f,terrainLayer
+		);
+	}
+
+	/// <summary>
+	/// Enables gravity to let the player fall.
+	/// </summary>
+	void Fall()
+	{
+		playerRigidbody.isKinematic = false;
+		playerRigidbody.gravityScale = 1f;
+	}
+
+	/// <summary>
+	/// Disables gravity and locks the player to the ground.
+	/// </summary>
+	void StickToGround()
+	{
+		playerRigidbody.isKinematic = true;
+		playerRigidbody.gravityScale = 0f;
+		playerRigidbody.velocity = Vector2.zero; // tránh dư đà
+	}
+
 
 	/// <summary>
 	/// Checks whether the player can move to the next tile (no obstacle).
@@ -87,7 +142,10 @@ public class MainPlayerManager : MonoBehaviour
 
 		RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 1f, obstacleLayer);
 
-		// 💡 Vẽ ray để debug trong Scene view
+		if (currentMovementMode == MovementMode.LadderMove)
+			return true;
+
+		// Vẽ ray để debug trong Scene view
 		Color rayColor = hit.collider ? Color.red : Color.green;
 		Debug.DrawRay(origin, direction.normalized * distance, rayColor);
 

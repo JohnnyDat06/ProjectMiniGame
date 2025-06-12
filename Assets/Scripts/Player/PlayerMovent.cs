@@ -1,0 +1,78 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/// <summary>
+/// Player movement in 2D grid (left/right 1 unit per input)
+/// </summary>
+public class PlayerGridMovement : MonoBehaviour
+{
+	[Header("Movement Settings")]
+	[SerializeField] private float moveSpeed = 5f;
+	[SerializeField] private LayerMask obstacleLayer;
+
+	private Vector3 targetPosition;
+	private bool isMoving = false;
+
+	void Start()
+	{
+		targetPosition = transform.position;
+	}
+
+	void Update()
+	{
+		if (isMoving) return;
+
+		float horizontalInput = Input.GetAxisRaw("Horizontal");
+
+		// Chỉ xử lý nếu có bấm trái/phải
+		if (horizontalInput != 0)
+		{
+			Vector3 direction = new Vector3(horizontalInput, 0f, 0f);
+
+			if (CanMove(direction))
+			{
+				targetPosition = transform.position + direction;
+				StartCoroutine(MoveToTargetPosition());
+			}
+			else
+			{
+				Debug.Log("🚧 Bị chặn! Không đi được hướng " + (horizontalInput < 0 ? "TRÁI" : "PHẢI"));
+			}
+		}
+	}
+
+	/// <summary>
+	/// Kiểm tra có chướng ngại ở hướng trái/phải không.
+	/// </summary>
+	bool CanMove(Vector3 direction)
+	{
+		float checkDistance = 1f;
+		Vector3 origin = transform.position;
+
+		RaycastHit2D hit = Physics2D.Raycast(origin, direction, checkDistance, obstacleLayer);
+
+		// Debug ray màu
+		Color rayColor = hit.collider ? Color.red : Color.green;
+		Debug.DrawRay(origin, direction.normalized * checkDistance, rayColor, 0.1f);
+
+		return hit.collider == null;
+	}
+
+	/// <summary>
+	/// Di chuyển mượt đến vị trí target.
+	/// </summary>
+	System.Collections.IEnumerator MoveToTargetPosition()
+	{
+		isMoving = true;
+
+		while ((transform.position - targetPosition).sqrMagnitude > 0.01f)
+		{
+			transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+			yield return null;
+		}
+
+		transform.position = targetPosition;
+		isMoving = false;
+	}
+}
