@@ -2698,10 +2698,6 @@ PrefabInstance:
       propertyPath: terrainLayer.m_Bits
       value: 64
       objectReference: {fileID: 0}
-    - target: {fileID: 8871182377309429233, guid: 50c8833ba5526d149b02e9b4ba75152a, type: 3}
-      propertyPath: obstacleLayer.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
