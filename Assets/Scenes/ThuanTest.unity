@@ -230,9 +230,10 @@ GameObject:
   - component: {fileID: 216411560}
   - component: {fileID: 216411559}
   - component: {fileID: 216411558}
+  - component: {fileID: 216411564}
   m_Layer: 6
-  m_Name: PlatformInLadder
-  m_TagString: Untagged
+  m_Name: PlatformOnLadder
+  m_TagString: PlatformOnLadder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -498,6 +499,20 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &216411564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216411556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef0dd4b09003554d9913df3abae0d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformEffector: {fileID: 216411558}
+  waitTimeBeforeReenable: 0.5
 --- !u!1 &285680879
 GameObject:
   m_ObjectHideFlags: 0
