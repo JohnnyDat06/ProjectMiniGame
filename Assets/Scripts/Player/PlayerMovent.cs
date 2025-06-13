@@ -29,10 +29,11 @@ public class PlayerGridMovement : MonoBehaviour
     private bool canMove = true;
     private bool isOnStairBase = false;
     private bool isOnLadder = false;
+	private GameObject currentPlatform = null;
 
-    // 🇬🇧 Initialize target position
-    // 🇻🇳 Khởi tạo vị trí đích ban đầu
-    void Start()
+	// 🇬🇧 Initialize target position
+	// 🇻🇳 Khởi tạo vị trí đích ban đầu
+	void Start()
     {
         targetPosition = transform.position;
     }
@@ -76,7 +77,21 @@ public class PlayerGridMovement : MonoBehaviour
                 Debug.Log("Bị chặn! Không đi được hướng " + (horizontalInput < 0 ? "TRÁI" : "PHẢI"));
             }
         }
-    }
+
+        //safas
+		if (Input.GetKeyDown(KeyCode.S))
+		{
+			if (currentPlatform != null)
+			{
+				PlatformOnLadder platformController = currentPlatform.GetComponent<PlatformOnLadder>();
+				if (platformController != null)
+				{
+					platformController.DropPlayer();
+					playerRigidbody.AddForce(Vector2.down * 2f, ForceMode2D.Impulse);
+				}
+			}
+		}
+	}
 
     // 🇬🇧 Check for obstacles before moving
     // 🇻🇳 Kiểm tra vật cản trước khi di chuyển
@@ -210,4 +225,5 @@ public class PlayerGridMovement : MonoBehaviour
             Debug.Log("Thoát khỏi thang");
         }
     }
+
 }
