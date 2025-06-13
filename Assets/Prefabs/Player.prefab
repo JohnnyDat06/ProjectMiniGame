@@ -194,6 +194,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  moveDelay: 0.4
+  launchForceY: 8
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
+  terrainLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  playerCollider: {fileID: 441535447365268060}
+  playerRigidbody: {fileID: 8663911517351133811}
+  playerTransform: {fileID: 6615625683649561712}
+  playerAnimator: {fileID: 1503583225174350197}
+  spriteRenderer: {fileID: 6103931346986919576}
