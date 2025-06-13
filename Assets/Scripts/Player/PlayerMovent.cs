@@ -62,8 +62,9 @@ public class PlayerGridMovement : MonoBehaviour
     private void Movement()
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
+		float vertical = Input.GetAxisRaw("Vertical");
 
-        if (horizontalInput != 0)
+		if (horizontalInput != 0)
         {
             Vector3 direction = new Vector3(horizontalInput, 0f, 0f);
 
@@ -78,16 +79,16 @@ public class PlayerGridMovement : MonoBehaviour
             }
         }
 
-        //safas
-		if (Input.GetKeyDown(KeyCode.S))
+		//xuong thang
+		if (vertical < -0.5f)
 		{
 			if (currentPlatform != null)
 			{
-				PlatformOnLadder platformController = currentPlatform.GetComponent<PlatformOnLadder>();
-				if (platformController != null)
+				PlatformOnLadder platform = currentPlatform.GetComponent<PlatformOnLadder>();
+				if (platform != null)
 				{
-					platformController.DropPlayer();
-					playerRigidbody.AddForce(Vector2.down * 2f, ForceMode2D.Impulse);
+					platform.DropPlayer();
+					playerRigidbody.AddForce(Vector2.down * 0.05f, ForceMode2D.Impulse);
 				}
 			}
 		}
@@ -153,10 +154,10 @@ public class PlayerGridMovement : MonoBehaviour
         // Climbing animation
         if (isOnLadder && Mathf.Abs(verticalInput) > 0)
         {
-            playerAnimator.SetBool("IsClimb", true);
             playerAnimator.SetBool("IsMove", false); // Disable walk animation while climbing
+			playerAnimator.SetTrigger("IsClimb");
         }
-		playerAnimator.SetBool("IsClimb", false);
+            
 
 		// FIX: chỉ bật IsMove nếu thật sự đang trong coroutine di chuyển
 		if (isMoving)
@@ -226,4 +227,26 @@ public class PlayerGridMovement : MonoBehaviour
         }
     }
 
+	// 🇬🇧 Detect when player lands on a platform with a ladder
+	// 🇻🇳 Nhận diện khi nhân vật rơi xuống một platform trên thang
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (collision.gameObject.CompareTag("PlatformOnLadder"))
+		{
+			ContactPoint2D[] contacts = new ContactPoint2D[1];
+			collision.GetContacts(contacts);
+			if (contacts[0].normal.y > 0.5f)
+			{
+				currentPlatform = collision.gameObject;
+			}
+		}
+	}
+
+	private void OnCollisionExit2D(Collision2D collision)
+	{
+		if (collision.gameObject == currentPlatform)
+		{
+			currentPlatform = null;
+		}
+	}
 }
