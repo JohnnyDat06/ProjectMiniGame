@@ -7,6 +7,8 @@ TagManager:
   - KillZone
   - Enemy
   - Ladder
+  - PlatformInLadder
+  - StairBase
   layers:
   - Default
   - TransparentFX
