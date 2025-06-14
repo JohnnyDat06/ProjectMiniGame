@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class PressurePlate : MonoBehaviour
+public class PressurePlateShow : MonoBehaviour
 {
-    [Header("Tilemap to Toggle")]
+    [Header("Tilemap to Show (nên để sẵn là inactive)")]
     [SerializeField] private GameObject tilemapToToggle;
 
     [Header("Animator for Plate Pressed Animation")]
@@ -19,9 +19,10 @@ public class PressurePlate : MonoBehaviour
         {
             playersOnPlate++;
             animator.SetBool("Pressed", true);
-            tilemapToToggle?.SetActive(false);
 
-            // Phát âm thanh tại vị trí hiện tại
+            // Hiện tilemap
+            tilemapToToggle?.SetActive(true);
+
             if (pressSound != null)
                 AudioSource.PlayClipAtPoint(pressSound, transform.position);
         }
@@ -35,7 +36,9 @@ public class PressurePlate : MonoBehaviour
             if (playersOnPlate == 0)
             {
                 animator.SetBool("Pressed", false);
-                tilemapToToggle?.SetActive(true);
+
+                // Ẩn tilemap nếu không còn ai đứng trên plate
+                tilemapToToggle?.SetActive(false);
             }
         }
     }
