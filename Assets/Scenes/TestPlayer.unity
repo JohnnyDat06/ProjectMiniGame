@@ -5520,10 +5520,10 @@ PrefabInstance:
     - target: {fileID: 7420998949908132355, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
       propertyPath: tilemapToToggle
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 682873594}
     - target: {fileID: 8828332102244352119, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
       propertyPath: m_Name
-      value: PressurePlate
+      value: PressurePlateHide
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6955,6 +6955,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f9f0d18ecd08d4ea9d7e1efbc7b2a5, type: 3}
+--- !u!1001 &1805188980069497266
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 129019036323227762, guid: 1e10b30f754adbb4cb316eb5aa3074bf, type: 3}
+      propertyPath: tilemapToToggle
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115266136222868462, guid: 1e10b30f754adbb4cb316eb5aa3074bf, type: 3}
+      propertyPath: m_Name
+      value: PressurePlateShow
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137954550118921818, guid: 1e10b30f754adbb4cb316eb5aa3074bf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.4917
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137954550118921818, guid: 1e10b30f754adbb4cb316eb5aa3074bf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.1634
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137954550118921818, guid: 1e10b30f754adbb4cb316eb5aa3074bf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137954550118921818, guid: 1e10b30f754adbb4cb316eb5aa3074bf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137954550118921818, guid: 1e10b30f754adbb4cb316eb5aa3074bf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137954550118921818, guid: 1e10b30f754adbb4cb316eb5aa3074bf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137954550118921818, guid: 1e10b30f754adbb4cb316eb5aa3074bf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137954550118921818, guid: 1e10b30f754adbb4cb316eb5aa3074bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137954550118921818, guid: 1e10b30f754adbb4cb316eb5aa3074bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137954550118921818, guid: 1e10b30f754adbb4cb316eb5aa3074bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1e10b30f754adbb4cb316eb5aa3074bf, type: 3}
 --- !u!1001 &2615154661265791254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7261,3 +7322,4 @@ SceneRoots:
   - {fileID: 2019891874}
   - {fileID: 1411772151}
   - {fileID: 1898863590}
+  - {fileID: 1805188980069497266}
