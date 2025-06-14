@@ -25,10 +25,10 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         ArrowUIHorizontal();
-        ArrowVertical();
+        ArrowUIVertical();
     }
 
-    private static void ArrowVertical()
+    private static void ArrowUIHorizontal()
     {
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
 
 
 
-    private static void ArrowUIHorizontal()
+    private static void ArrowUIVertical()
     {
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow))
         {

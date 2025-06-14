@@ -67,7 +67,6 @@ public class PlayerGridMovement : MonoBehaviour
 		if (horizontalInput != 0)
         {
             Vector3 direction = new Vector3(horizontalInput, 0f, 0f);
-
             if (CanMove(direction))
             {
                 targetPosition = transform.position + direction;
@@ -77,6 +76,7 @@ public class PlayerGridMovement : MonoBehaviour
             {
                 Debug.Log("Bị chặn! Không đi được hướng " + (horizontalInput < 0 ? "TRÁI" : "PHẢI"));
             }
+            
         }
 
 		//xuong thang
