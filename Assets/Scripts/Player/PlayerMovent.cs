@@ -119,6 +119,9 @@ public class PlayerGridMovement : MonoBehaviour
 
 		yield return new WaitForSeconds(moveDelay);
 		canMove = true;
+
+		PlayerStep(); // Notify the clone!
+
 	}
 
 	/// <summary>
@@ -240,6 +243,16 @@ public class PlayerGridMovement : MonoBehaviour
 		{
 			string history = string.Join(" → ", moveHistory);
 			Debug.Log("7-step path complete: " + history);
+
+			FindObjectOfType<GameManager>().SummonPlayerClone(moveHistory);
 		}
 	}
+
+	public static event System.Action OnPlayerStep;
+
+	private void PlayerStep()
+	{
+		OnPlayerStep?.Invoke(); // Notify clone to move
+	}
+
 }
