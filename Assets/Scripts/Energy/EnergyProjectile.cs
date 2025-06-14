@@ -8,7 +8,6 @@ public class EnergyProjectile : MonoBehaviour
     private List<string> comboData;
     private int comboIndex;
 
-<<<<<<< Updated upstream
     //Assign the target transform for the projectile
     public void SetTarget(Transform targetTransform)
     {
@@ -44,39 +43,6 @@ public class EnergyProjectile : MonoBehaviour
         if (other.TryGetComponent(out TargetTrigger targetTrigger))
         {
             targetTrigger.RegisterHit(comboIndex, comboData);
-=======
-    public void SetTarget(Transform targetTransform)
-    {
-        target = targetTransform;
-    }
-
-    public void SetComboData(List<string> data, int index)
-    {
-        comboData = new(data);
-        comboIndex = index;
-    }
-
-    private void Update()
-    {
-        if (target == null) return;
-
-        Vector3 dir = target.position - transform.position;
-        transform.position += dir.normalized * speed * Time.deltaTime;
-
-        if (dir != Vector3.zero)
-            transform.right = dir;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.TryGetComponent(out TargetTrigger targetTrigger))
-        {
-            if (comboIndex == 6) // Viên thứ 7 (0-based index)
-            {
-                targetTrigger.RegisterHit(comboData);
-            }
-
->>>>>>> Stashed changes
             Destroy(gameObject);
         }
     }

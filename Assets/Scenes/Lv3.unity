@@ -862,70 +862,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152206868}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream:Assets/Scenes/Lv3.unity
-=======
---- !u!1001 &167260595
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2105304684114370014, guid: b270b1e30af7f304ea00c1dbc9f19b4c, type: 3}
-      propertyPath: gameManagerObject
-      value: 
-      objectReference: {fileID: 1553265054}
-    - target: {fileID: 3498793822372230341, guid: b270b1e30af7f304ea00c1dbc9f19b4c, type: 3}
-      propertyPath: m_Name
-      value: Target
-      objectReference: {fileID: 0}
-    - target: {fileID: 5855833747663175468, guid: b270b1e30af7f304ea00c1dbc9f19b4c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.62
-      objectReference: {fileID: 0}
-    - target: {fileID: 5855833747663175468, guid: b270b1e30af7f304ea00c1dbc9f19b4c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 5855833747663175468, guid: b270b1e30af7f304ea00c1dbc9f19b4c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.0042785527
-      objectReference: {fileID: 0}
-    - target: {fileID: 5855833747663175468, guid: b270b1e30af7f304ea00c1dbc9f19b4c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5855833747663175468, guid: b270b1e30af7f304ea00c1dbc9f19b4c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5855833747663175468, guid: b270b1e30af7f304ea00c1dbc9f19b4c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5855833747663175468, guid: b270b1e30af7f304ea00c1dbc9f19b4c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5855833747663175468, guid: b270b1e30af7f304ea00c1dbc9f19b4c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5855833747663175468, guid: b270b1e30af7f304ea00c1dbc9f19b4c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5855833747663175468, guid: b270b1e30af7f304ea00c1dbc9f19b4c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b270b1e30af7f304ea00c1dbc9f19b4c, type: 3}
->>>>>>> Stashed changes:Assets/Scenes/KhoaMapLv3.unity
 --- !u!1 &169078395
 GameObject:
   m_ObjectHideFlags: 0
@@ -5121,11 +5057,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1551261548}
   m_CullTransparentMesh: 1
---- !u!1 &1553265054 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 276140733461713400, guid: a1c764ac62307db408ec2d37c19d07da, type: 3}
-  m_PrefabInstance: {fileID: 1656498539}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1556162691
 GameObject:
   m_ObjectHideFlags: 0
