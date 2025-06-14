@@ -24,8 +24,8 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        ArrowUIHorizontal();
-        ArrowUIVertical();
+        //ArrowUIHorizontal();
+        //ArrowUIVertical();
     }
 
     private static void ArrowUIHorizontal()
