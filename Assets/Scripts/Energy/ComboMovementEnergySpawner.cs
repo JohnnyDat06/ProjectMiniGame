@@ -35,16 +35,16 @@ public class ComboMovementEnergySpawner : MonoBehaviour
     {
         if (shootCount >= 7) return;
 
-        Vector3 spawnPos = playerTransform.position + (Vector3)spawnOffset;
-        GameObject go = Instantiate(energyPrefab, spawnPos, Quaternion.identity);
+        //Vector3 spawnPos = playerTransform.position + (Vector3)spawnOffset;
+        //GameObject go = Instantiate(energyPrefab, spawnPos, Quaternion.identity);
 
-        if (go.TryGetComponent(out EnergyProjectile proj))
-        {
-            recordedMoves.Add(dir.ToString());
-            proj.SetTarget(targetTransform);
-            proj.SetComboData(recordedMoves, shootCount);
-        }
+        //if (go.TryGetComponent(out EnergyProjectile proj))
+        //{
+        //    recordedMoves.Add(dir.ToString());
+        //    proj.SetTarget(targetTransform);
+        //    proj.SetComboData(recordedMoves, shootCount);
+        //}
 
-        shootCount++;
+        //shootCount++;
     }
 }
