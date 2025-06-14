@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ThuanTest 1.unity
-    guid: 7e9289e43534c8b4fba77199fbb0c8ea
+    path: Assets/Scenes/Lv1.unity
+    guid: 9375d1e144ce9c241a0a48f9fd5d91b4
   - enabled: 1
     path: Assets/Scenes/Lv2.unity
     guid: adac15bb5179104468cf8d08ef9534fa
