@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("Các nút điều khiển mũi tên")]
+    [Header("Button Arrow")]
     [SerializeField] private Button buttonUp;
     [SerializeField] private Button buttonDown;
     [SerializeField] private Button buttonLeft;
@@ -11,7 +11,6 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        // Gán sự kiện cho các nút
         if (buttonUp != null)
             buttonUp.onClick.AddListener(() => ArrowManager.Instance.OnArrowButtonPressed(ArrowDirection.Up));
         if (buttonDown != null)

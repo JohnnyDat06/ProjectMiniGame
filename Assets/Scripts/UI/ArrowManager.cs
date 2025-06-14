@@ -64,7 +64,7 @@ public class ArrowManager : MonoBehaviour
         }
     }
 
-    // Phương thức để gọi từ các nút UI
+    // call this method when an arrow button is pressed
     public void OnArrowButtonPressed(ArrowDirection direction)
     {
         if (currentStage == 1)
@@ -77,7 +77,7 @@ public class ArrowManager : MonoBehaviour
         }
     }
 
-    // Giai đoạn 1: Sinh mũi tên
+    // Spawn arrow based on the direction
     private void SpawnArrow(ArrowDirection direction)
     {
         if (spawnedArrows.Count < maxArrows)
@@ -110,7 +110,7 @@ public class ArrowManager : MonoBehaviour
             }
         }
     }
-
+    // Get the appropriate arrow prefab based on the direction
     private GameObject GetArrowPrefab(ArrowDirection direction)
     {
         switch (direction)
@@ -123,12 +123,11 @@ public class ArrowManager : MonoBehaviour
         }
     }
 
-    // Chuẩn bị cho Giai đoạn 2
+    // prepare for phase 2 when all arrows are spawned
     private void StartPhase2()
     {
         if (spawnedArrows.Count > 0 && currentPositionMarker != null)
         {
-            // Di chuyển marker đến vị trí đầu tiên để đánh dấu mũi tên sẽ bị xóa
             UpdatePositionMarker(0);
             currentPositionMarker.SetActive(true);
         }
@@ -139,7 +138,7 @@ public class ArrowManager : MonoBehaviour
         }
     }
 
-    // Giai đoạn 2: Xóa mũi tên và di chuyển marker
+    // Remove the arrow and move the marker to the next position
     private void RemoveArrowAndMoveMarker()
     {
         if(currentStage == 2)
@@ -183,16 +182,15 @@ public class ArrowManager : MonoBehaviour
         currentPositionMarker.SetActive(true);
     }
 
-    // Giai đoạn 3: Tắt tất cả UI
+    // turn off all UI elements and clear arrows
     private void StartPhase3()
     {
         if (currentPositionMarker != null)
         {
-            currentPositionMarker.SetActive(false); // Đảm bảo marker ẩn
+            currentPositionMarker.SetActive(false);
         }
 
-        // Đảm bảo tất cả mũi tên còn lại (nếu có lỗi gì đó) cũng được hủy
-        foreach (var arrowData in spawnedArrows.ToList()) // Sử dụng ToList() để tránh lỗi khi sửa đổi danh sách
+        foreach (var arrowData in spawnedArrows.ToList())
         {
             if (arrowData.ArrowGameObject != null)
             {
@@ -200,7 +198,7 @@ public class ArrowManager : MonoBehaviour
             }
             spawnedArrows.Remove(arrowData);
         }
-        spawnedArrows.Clear(); // Đảm bảo danh sách rỗng
+        spawnedArrows.Clear();
 
         foreach (GameObject uiElement in uiElementsToHide)
         {
