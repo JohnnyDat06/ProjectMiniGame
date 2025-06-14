@@ -198,7 +198,7 @@ MonoBehaviour:
   launchForceY: 8
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   rb: {fileID: 4951010225202378013}
   animator: {fileID: 7621687709144963055}
   spriteRenderer: {fileID: 6897973207587144727}

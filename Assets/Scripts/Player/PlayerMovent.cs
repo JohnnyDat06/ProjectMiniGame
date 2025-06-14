@@ -68,24 +68,6 @@ public class PlayerGridMovement : MonoBehaviour
 		float vertical = Input.GetAxisRaw("Vertical");
 
 		if (horizontalInput != 0)
-
-        {
-            Vector3 direction = new Vector3(horizontalInput, 0f, 0f);
-            if (CanMove(direction))
-            {
-                targetPosition = transform.position + direction;
-                StartCoroutine(MoveToTargetPosition());
-            }
-            else
-            {
-                Debug.Log("Bị chặn! Không đi được hướng " + (horizontalInput < 0 ? "TRÁI" : "PHẢI"));
-            }
-            
-        }
-
-		//xuong thang
-		if (vertical < -0.5f)
-
 		{
 			Vector3 direction = new Vector3(horizontalInput, 0f, 0f);
 
@@ -272,5 +254,4 @@ public class PlayerGridMovement : MonoBehaviour
 	{
 		OnPlayerStep?.Invoke(); // Notify clone to move
 	}
-
 }
