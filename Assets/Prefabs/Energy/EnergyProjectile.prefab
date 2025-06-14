@@ -100,7 +100,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  targetTransform: {fileID: 5855833747663175468, guid: b270b1e30af7f304ea00c1dbc9f19b4c, type: 3}
 --- !u!50 &4062254000829645119
 Rigidbody2D:
   serializedVersion: 4
@@ -116,7 +115,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
