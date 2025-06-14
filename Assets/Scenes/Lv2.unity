@@ -264,6 +264,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5120998827686770942, guid: 50c8833ba5526d149b02e9b4ba75152a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1735316902}
+    - targetCorrespondingSourceObject: {fileID: 5120998827686770942, guid: 50c8833ba5526d149b02e9b4ba75152a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1735316907}
   m_SourcePrefab: {fileID: 100100000, guid: 50c8833ba5526d149b02e9b4ba75152a, type: 3}
 --- !u!1 &96537902
 GameObject:
@@ -4194,6 +4197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorFlag: {fileID: 1332113154}
+  sceneChangeDelay: 3
 --- !u!95 &1332113154
 Animator:
   serializedVersion: 5
@@ -5319,6 +5323,18 @@ Transform:
   m_PrefabInstance: {fileID: 91952557}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1735316902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686487050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91442dc6e309ced43a7a20860a83f641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1735316907
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
