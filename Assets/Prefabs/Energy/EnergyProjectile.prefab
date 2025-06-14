@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3375568118453089848}
   - component: {fileID: 4245609537567939454}
   - component: {fileID: 4062254000829645119}
-  - component: {fileID: 5993623023962715602}
+  - component: {fileID: 7060051967844652017}
   m_Layer: 0
   m_Name: EnergyProjectile
   m_TagString: Untagged
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 3510401630611134522}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.85, y: -0.18, z: 0.009624815}
-  m_LocalScale: {x: 0.5197327, y: 0.48076913, z: 1}
+  m_LocalPosition: {x: -3.2444, y: 0.8184, z: 0.009624815}
+  m_LocalScale: {x: 0.72344345, y: 0.70695454, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,9 +75,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 21300000, guid: 5abf55aae5d5f064eaf9766ef8f24e2f, type: 3}
+  m_Color: {r: 1, g: 1, b: 0.7882353, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,7 +100,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  targetTransform: {fileID: 5855833747663175468, guid: b270b1e30af7f304ea00c1dbc9f19b4c, type: 3}
 --- !u!50 &4062254000829645119
 Rigidbody2D:
   serializedVersion: 4
@@ -128,8 +127,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &5993623023962715602
-CircleCollider2D:
+--- !u!61 &7060051967844652017
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -160,6 +159,16 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00000011920929, y: -0.00000023841858}
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1.0185}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
