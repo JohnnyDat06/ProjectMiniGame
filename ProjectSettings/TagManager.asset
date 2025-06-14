@@ -9,6 +9,7 @@ TagManager:
   - Ladder
   - StairBase
   - PlatformOnLadder
+  - Target
   layers:
   - Default
   - TransparentFX

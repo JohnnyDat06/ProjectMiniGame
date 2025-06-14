@@ -3,32 +3,28 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	[Header("Clone Settings")]
-	[SerializeField] private GameObject playerClonePrefab;
-	[SerializeField] private Transform cloneSpawnPoint;
+    [Header("Clone Settings")]
+    [SerializeField] private GameObject playerClonePrefab;
+    [SerializeField] private Transform cloneSpawnPoint;
 
-	private GameObject spawnedClone;
-	private bool hasSpawnedClone = false;
+    private GameObject spawnedClone;
+    private bool hasSpawnedClone = false;
+    private bool isUnlockedByTarget = false;
 
-	/// <summary>
-	/// Gọi hàm này sau khi đủ 7 bước.
-	/// </summary>
-	public void SummonPlayerClone(List<string> recordedMoves)
-	{
-		//Chỉ cho phép sinh clone 1 lần duy nhất
-		if (hasSpawnedClone || recordedMoves.Count != 7) return;
+    //Unlocks permission to spawn clone (called by TargetTrigger)
+    public void UnlockClone() => isUnlockedByTarget = true;
 
-		spawnedClone = Instantiate(playerClonePrefab, cloneSpawnPoint.position, Quaternion.identity);
-		hasSpawnedClone = true;
+    //Spawn clone if allowed and valid (only once, with 7 recorded moves)
+    public void SummonPlayerClone(List<string> recordedMoves)
+    {
+        if (!isUnlockedByTarget || hasSpawnedClone || recordedMoves.Count != 7) return;
 
-		PlayerClone cloneScript = spawnedClone.GetComponent<PlayerClone>();
-		if (cloneScript != null)
-		{
-			cloneScript.SetReplayPath(recordedMoves);
-		}
-		else
-		{
-			Debug.LogWarning("⚠️ Clone prefab thiếu script PlayerCloneReplay!");
-		}
-	}
+        spawnedClone = Instantiate(playerClonePrefab, cloneSpawnPoint.position, Quaternion.identity);
+        hasSpawnedClone = true;
+
+        if (spawnedClone.TryGetComponent(out PlayerClone cloneScript))
+            cloneScript.SetReplayPath(recordedMoves);
+        else
+            Debug.LogWarning("⚠️ Clone prefab thiếu script PlayerClone!");
+    }
 }

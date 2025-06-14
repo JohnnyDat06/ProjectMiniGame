@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4587503804959212914}
   - component: {fileID: 1371703751956617053}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: GameManagerPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,6 +48,3 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   targetTransform: {fileID: 0}
   spawnOffset: {x: 0, y: 0}
-  playerGridMovement: {fileID: 0}
-  uiManager: {fileID: 0}
-  maxShootCount: 7

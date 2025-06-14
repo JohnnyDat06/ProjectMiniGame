@@ -1,46 +1,48 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class EnergyProjectile : MonoBehaviour
 {
-    [Header("Projectile speed")]
     [SerializeField] private float speed = 10f;
+    private Transform target;
+    private List<string> comboData;
+    private int comboIndex;
 
-    [Header("Target (assigned via script or Inspector)")]
-    [SerializeField] private Transform targetTransform;
-
-    private Vector3 targetPosition;
-    private bool hasTarget = false;
-
-    private void Start()
+    //Assign the target transform for the projectile
+    public void SetTarget(Transform targetTransform)
     {
-        // Use assigned transform's current position if any
-        if (targetTransform != null)
+        target = targetTransform;
+    }
+
+    //Set combo data and the index of this projectile
+    public void SetComboData(List<string> data, int index)
+    {
+        comboData = new List<string>(data);
+        comboIndex = index;
+    }
+
+    //Move the projectile towards the target and rotate it to face the direction
+    private void Update()
+    {
+        if (target == null) return;
+
+        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+
+        // Rotate to face direction
+        Vector3 dir = target.position - transform.position;
+        if (dir != Vector3.zero)
         {
-            SetTarget(targetTransform.position);
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
         }
     }
 
-    public void SetTarget(Vector3 target)
+    //Check for collision with TargetTrigger and register the hit
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        targetPosition = target;
-        hasTarget = true;
-    }
-
-    public void SetTarget(Transform target)
-    {
-        targetTransform = target;
-    }
-
-    private void Update()
-    {
-        Vector3 targetPos = hasTarget ? targetPosition :
-                           targetTransform != null ? targetTransform.position :
-                           transform.position;
-
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-
-        if (Vector3.Distance(transform.position, targetPos) < 0.05f)
+        if (other.TryGetComponent(out TargetTrigger targetTrigger))
         {
+            targetTrigger.RegisterHit(comboIndex, comboData);
             Destroy(gameObject);
         }
     }
