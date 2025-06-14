@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  moveDelay: 0.4
+  moveDelay: 0.8
   launchForceY: 8
   obstacleLayer:
     serializedVersion: 2
