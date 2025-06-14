@@ -9,22 +9,26 @@ public class GameManager : MonoBehaviour
 
     private GameObject spawnedClone;
     private bool hasSpawnedClone = false;
-    private bool isUnlockedByTarget = false;
 
-    //Unlocks permission to spawn clone (called by TargetTrigger)
-    public void UnlockClone() => isUnlockedByTarget = true;
-
-    //Spawn clone if allowed and valid (only once, with 7 recorded moves)
+    /// <summary>
+    /// Gọi hàm này sau khi đủ 7 bước.
+    /// </summary>
     public void SummonPlayerClone(List<string> recordedMoves)
     {
-        if (!isUnlockedByTarget || hasSpawnedClone || recordedMoves.Count != 7) return;
+        //Chỉ cho phép sinh clone 1 lần duy nhất
+        if (hasSpawnedClone || recordedMoves.Count != 7) return;
 
         spawnedClone = Instantiate(playerClonePrefab, cloneSpawnPoint.position, Quaternion.identity);
         hasSpawnedClone = true;
 
-        if (spawnedClone.TryGetComponent(out PlayerClone cloneScript))
+        PlayerClone cloneScript = spawnedClone.GetComponent<PlayerClone>();
+        if (cloneScript != null)
+        {
             cloneScript.SetReplayPath(recordedMoves);
+        }
         else
-            Debug.LogWarning("⚠️ Clone prefab thiếu script PlayerClone!");
+        {
+            Debug.LogWarning("⚠️ Clone prefab thiếu script PlayerCloneReplay!");
+        }
     }
 }
