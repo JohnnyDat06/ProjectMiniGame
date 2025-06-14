@@ -18,11 +18,10 @@ public class ComboMovementEnergySpawner : MonoBehaviour
     [SerializeField] private Transform targetTransform;
     [SerializeField] private Vector2 spawnOffset = Vector2.up;
 
-    private List<string> recordedMoves = new List<string>();
+    public List<string> recordedMoves = new List<string>();
     private int shootCount = 0;
 
-    //Check player input and spawn energy if shoot count < 7
-    private void Update() 
+    private void Update()
     {
         if (shootCount >= 7) return;
 
@@ -32,8 +31,7 @@ public class ComboMovementEnergySpawner : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.D)) Spawn(DirectionType.Right);
     }
 
-    //Spawn energy projectile and record direction
-    void Spawn(DirectionType dir) 
+    private void Spawn(DirectionType dir)
     {
         if (shootCount >= 7) return;
 
