@@ -662,6 +662,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8871182377309429233, guid: 50c8833ba5526d149b02e9b4ba75152a, type: 3}
+      propertyPath: moveDelay
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6219,6 +6223,14 @@ PrefabInstance:
     - target: {fileID: 5544234273429294043, guid: b052a238331610d43af8e5ce82848814, type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[3].Array.data[3].Y
       value: -5156250
+      objectReference: {fileID: 0}
+    - target: {fileID: 6007858999805196892, guid: b052a238331610d43af8e5ce82848814, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6007858999805196892, guid: b052a238331610d43af8e5ce82848814, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6372785198595532037, guid: b052a238331610d43af8e5ce82848814, type: 3}
       propertyPath: m_Name
