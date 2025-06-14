@@ -1,25 +1,33 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
 {
-    [Header("Put the tilemap you want to disappear here")]
+    [Header("Tilemap to Toggle")]
     [SerializeField] private GameObject tilemapToToggle;
-    [Header("Drag the Animator with Pressed animation here")]
+
+    [Header("Animator for Plate Pressed Animation")]
     [SerializeField] private Animator animator;
+
+    [Header("Sound when stepping on plate")]
+    [SerializeField] private AudioClip pressSound;
+
     private int playersOnPlate = 0;
-    //The "Player" tag is touched and the Animation set to SetBool is triggered causing the PressurePlate to press down and the "tilemapToToggle" will temporarily hide if the "Player" is still standing there
-    void OnTriggerEnter2D(Collider2D other)
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             playersOnPlate++;
             animator.SetBool("Pressed", true);
-            if (tilemapToToggle != null)
-                tilemapToToggle.SetActive(false);
+            tilemapToToggle?.SetActive(false);
+
+            // Phát âm thanh tại vị trí hiện tại
+            if (pressSound != null)
+                AudioSource.PlayClipAtPoint(pressSound, transform.position);
         }
     }
-    //The "Player" tag leaves the collision then the set Animation will return to the beginning and tilemapToToggle will be enabled
-    void OnTriggerExit2D(Collider2D other)
+
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
@@ -27,8 +35,7 @@ public class PressurePlate : MonoBehaviour
             if (playersOnPlate == 0)
             {
                 animator.SetBool("Pressed", false);
-                if (tilemapToToggle != null)
-                    tilemapToToggle.SetActive(true);
+                tilemapToToggle?.SetActive(true);
             }
         }
     }

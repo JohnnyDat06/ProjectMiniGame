@@ -1281,6 +1281,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5120998827686770942, guid: 50c8833ba5526d149b02e9b4ba75152a, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 6615625683649561712, guid: 50c8833ba5526d149b02e9b4ba75152a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.517
@@ -5453,6 +5457,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1870532644}
   m_CullTransparentMesh: 1
+--- !u!1001 &1898863590
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5976395306498967887, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7280117
+      objectReference: {fileID: 0}
+    - target: {fileID: 5976395306498967887, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7019032
+      objectReference: {fileID: 0}
+    - target: {fileID: 5976395306498967887, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5976395306498967887, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5976395306498967887, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5976395306498967887, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5976395306498967887, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5976395306498967887, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5976395306498967887, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5976395306498967887, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5976395306498967887, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5976395306498967887, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7420998949908132355, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
+      propertyPath: pressSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 85096d84913c1f7458e0cdf2c49665a5, type: 3}
+    - target: {fileID: 7420998949908132355, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
+      propertyPath: tilemapToToggle
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828332102244352119, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
+      propertyPath: m_Name
+      value: PressurePlate
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d5355995ef7898e4bb188e984ac9e265, type: 3}
 --- !u!1 &1906643437
 GameObject:
   m_ObjectHideFlags: 0
@@ -7183,3 +7260,4 @@ SceneRoots:
   - {fileID: 187410670}
   - {fileID: 2019891874}
   - {fileID: 1411772151}
+  - {fileID: 1898863590}
