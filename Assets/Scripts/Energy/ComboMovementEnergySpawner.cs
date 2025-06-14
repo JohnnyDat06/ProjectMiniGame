@@ -11,30 +11,22 @@ public enum DirectionType
 
 public class ComboMovementEnergySpawner : MonoBehaviour
 {
-    [Header("Prefab và đối tượng liên quan")]
+    [Header("Prefab and related objects")]
     [SerializeField] private GameObject energyPrefab;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform targetTransform;
     [SerializeField] private Vector2 spawnOffset = Vector2.up;
     [SerializeField] private PlayerGridMovement playerGridMovement;
 
-    [Header("UI Manager (không chỉnh sửa)")]
+    [Header("UI Manager")]
     [SerializeField] private UIManager uiManager;
 
-    [Header("Combo cần thực hiện")]
-    [SerializeField]
-    private DirectionType[] comboSequence = new DirectionType[]
-    {
-        DirectionType.Left,
-        DirectionType.Right,
-        DirectionType.Right,
-        DirectionType.Up,
-        DirectionType.Down
-    };
+    [Header("Shoot Settings")]
+    [SerializeField] private int maxShootCount = 7;
 
-    private int currentComboIndex = 0;
     private bool canReadInput = true;
     private DirectionType lastInput = DirectionType.None;
+    private int shootCount = 0;
 
     private void Update()
     {
@@ -43,7 +35,7 @@ public class ComboMovementEnergySpawner : MonoBehaviour
         DirectionType input = GetInputFromKey();
         if (input != DirectionType.None && input != lastInput)
         {
-            HandleComboStep(input);
+            SpawnEnergy();
             lastInput = input;
         }
 
@@ -55,33 +47,21 @@ public class ComboMovementEnergySpawner : MonoBehaviour
 
     private DirectionType GetInputFromKey()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.S)) return DirectionType.Up;
-        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.W)) return DirectionType.Down;
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) return DirectionType.Up;
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) return DirectionType.Down;
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) return DirectionType.Left;
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) return DirectionType.Right;
         return DirectionType.None;
     }
 
-    private void HandleComboStep(DirectionType inputDirection)
-    {
-        if (inputDirection == comboSequence[currentComboIndex])
-        {
-            SpawnEnergy();
-            currentComboIndex++;
-
-            if (currentComboIndex >= comboSequence.Length)
-            {
-                currentComboIndex = 0;
-            }
-        }
-        else
-        {
-            StartCoroutine(ResetComboOnly());
-        }
-    }
-
     private void SpawnEnergy()
     {
+        if (shootCount >= maxShootCount)
+        {
+            canReadInput = false;
+            return;
+        }
+
         if (energyPrefab != null && playerTransform != null)
         {
             Vector3 spawnPos = playerTransform.position + (Vector3)spawnOffset;
@@ -91,18 +71,13 @@ public class ComboMovementEnergySpawner : MonoBehaviour
             {
                 projectile.SetTarget(targetTransform);
             }
+
+            shootCount++;
+
+            if (shootCount >= maxShootCount)
+            {
+                canReadInput = false;
+            }
         }
-    }
-
-    private System.Collections.IEnumerator ResetComboOnly()
-    {
-        canReadInput = false;
-        currentComboIndex = 0;
-
-        while (Input.anyKey)
-            yield return null;
-
-        yield return new WaitForSeconds(0.5f);
-        canReadInput = true;
     }
 }

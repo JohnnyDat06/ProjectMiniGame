@@ -48,5 +48,6 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   targetTransform: {fileID: 0}
   spawnOffset: {x: 0, y: 0}
-  startingPosition: {fileID: 0}
-  comboSequence: 0100000002000000020000000300000004000000
+  playerGridMovement: {fileID: 0}
+  uiManager: {fileID: 0}
+  maxShootCount: 7

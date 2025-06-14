@@ -27,4 +27,12 @@ public class RespawnPlayer : MonoBehaviour
             Die();
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("KillZone") || collision.gameObject.name == "PlayerClone(Clone)")
+        {
+            Die();
+        }
+    }
 }
