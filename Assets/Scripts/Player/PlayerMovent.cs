@@ -54,6 +54,7 @@ public class PlayerGridMovement : MonoBehaviour
 		{
 			LaunchUp();
 			RecordMove("up");
+			ArrowManager.Instance.OnArrowButtonPressed(ArrowDirection.Up); // Notify UI arrow button
 		}
 
 		UpdateAnimation();
@@ -76,6 +77,16 @@ public class PlayerGridMovement : MonoBehaviour
 				targetPosition = transform.position + direction;
 				StartCoroutine(MoveToTargetPosition());
 
+				// set UI arrow buttons
+				if (horizontalInput < 0)
+				{
+					ArrowManager.Instance.OnArrowButtonPressed(ArrowDirection.Left);
+				}	
+				if (horizontalInput > 0)
+				{
+					ArrowManager.Instance.OnArrowButtonPressed(ArrowDirection.Right);
+				}
+
 				RecordMove(horizontalInput < 0 ? "left" : "right");
 			}
 			else
@@ -95,6 +106,7 @@ public class PlayerGridMovement : MonoBehaviour
 				if (Time.time - lastDownTime > downRecordCooldown)
 				{
 					RecordMove("down");
+					ArrowManager.Instance.OnArrowButtonPressed(ArrowDirection.Down); // Notify UI arrow button
 					lastDownTime = Time.time;
 				}
 			}
