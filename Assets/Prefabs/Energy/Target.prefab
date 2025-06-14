@@ -9,8 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5855833747663175468}
+<<<<<<< Updated upstream
   - component: {fileID: 3982169832447981775}
   - component: {fileID: 812822022759182296}
+=======
+  - component: {fileID: 2105304684114370014}
+  - component: {fileID: 3826776817135998900}
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: Target
   m_TagString: Target
@@ -33,7 +38,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!114 &3982169832447981775
+=======
+--- !u!114 &2105304684114370014
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,8 +54,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f387a0daa565df042a059d8dd0a907ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   gameManager: {fileID: 0}
 --- !u!61 &812822022759182296
+=======
+  gameManagerObject: {fileID: 0}
+--- !u!61 &3826776817135998900
+>>>>>>> Stashed changes
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
