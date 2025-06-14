@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     private GameObject spawnedClone;
     private bool hasSpawnedClone = false;
+<<<<<<< Updated upstream
     private bool isUnlockedByTarget = false;
 
     //Unlocks permission to spawn clone (called by TargetTrigger)
@@ -26,5 +27,25 @@ public class GameManager : MonoBehaviour
             cloneScript.SetReplayPath(recordedMoves);
         else
             Debug.LogWarning("⚠️ Clone prefab thiếu script PlayerClone!");
+=======
+
+    // ✅ Giữ riêng quyền sinh clone cho TargetTrigger gọi
+    public void TrySummonFromTarget(List<string> recordedMoves)
+    {
+        if (hasSpawnedClone || recordedMoves.Count != 7) return;
+
+        spawnedClone = Instantiate(playerClonePrefab, cloneSpawnPoint.position, Quaternion.identity);
+        hasSpawnedClone = true;
+
+        PlayerClone cloneScript = spawnedClone.GetComponent<PlayerClone>();
+        if (cloneScript != null)
+        {
+            cloneScript.SetReplayPath(recordedMoves);
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ Clone prefab thiếu script PlayerClone!");
+        }
+>>>>>>> Stashed changes
     }
 }

@@ -47,4 +47,10 @@ MonoBehaviour:
   energyPrefab: {fileID: 3510401630611134522, guid: 18b7bbea6ed3aeb4e95a386214d7bcb4, type: 3}
   playerTransform: {fileID: 0}
   targetTransform: {fileID: 0}
+<<<<<<< Updated upstream:Assets/Prefabs/Energy/GameManagerPoint.prefab
+=======
+  playerGridMovement: {fileID: 0}
+  uiManager: {fileID: 0}
+  maxShootCount: 7
+>>>>>>> Stashed changes:Assets/Prefabs/Energy/GameManager.prefab
   spawnOffset: {x: 0, y: 0}

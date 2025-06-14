@@ -4002,6 +4002,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6615625683649561712, guid: 50c8833ba5526d149b02e9b4ba75152a, type: 3}
   m_PrefabInstance: {fileID: 39700690498633094}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1474152448 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8871182377309429233, guid: 50c8833ba5526d149b02e9b4ba75152a, type: 3}
+  m_PrefabInstance: {fileID: 39700690498633094}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca7dabb0b401e84c8507ca1969d1d13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1508822200
 GameObject:
   m_ObjectHideFlags: 0
@@ -7410,6 +7421,10 @@ PrefabInstance:
       propertyPath: startingPosition
       value: 
       objectReference: {fileID: 904476879}
+    - target: {fileID: 1371703751956617053, guid: e3d0f0261eeca3c41a23d15344e9507b, type: 3}
+      propertyPath: playerGridMovement
+      value: 
+      objectReference: {fileID: 1474152448}
     - target: {fileID: 1942374468270175076, guid: e3d0f0261eeca3c41a23d15344e9507b, type: 3}
       propertyPath: m_Name
       value: GameManager
