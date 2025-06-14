@@ -68,24 +68,6 @@ public class PlayerGridMovement : MonoBehaviour
 		float vertical = Input.GetAxisRaw("Vertical");
 
 		if (horizontalInput != 0)
-
-        {
-            Vector3 direction = new Vector3(horizontalInput, 0f, 0f);
-            if (CanMove(direction))
-            {
-                targetPosition = transform.position + direction;
-                StartCoroutine(MoveToTargetPosition());
-            }
-            else
-            {
-                Debug.Log("Bị chặn! Không đi được hướng " + (horizontalInput < 0 ? "TRÁI" : "PHẢI"));
-            }
-            
-        }
-
-		//xuong thang
-		if (vertical < -0.5f)
-
 		{
 			Vector3 direction = new Vector3(horizontalInput, 0f, 0f);
 
@@ -137,6 +119,9 @@ public class PlayerGridMovement : MonoBehaviour
 
 		yield return new WaitForSeconds(moveDelay);
 		canMove = true;
+
+		PlayerStep(); // Notify the clone!
+
 	}
 
 	/// <summary>
@@ -258,6 +243,15 @@ public class PlayerGridMovement : MonoBehaviour
 		{
 			string history = string.Join(" → ", moveHistory);
 			Debug.Log("7-step path complete: " + history);
+
+			FindObjectOfType<GameManager>().SummonPlayerClone(moveHistory);
 		}
+	}
+
+	public static event System.Action OnPlayerStep;
+
+	private void PlayerStep()
+	{
+		OnPlayerStep?.Invoke(); // Notify clone to move
 	}
 }
