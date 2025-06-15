@@ -9,7 +9,7 @@ public class PlayerClone : MonoBehaviour
 {
 	[Header("Settings")]
 	[SerializeField] private float moveSpeed = 5f;
-	[SerializeField] private float moveDelay = 0.5f;
+	[SerializeField] private float moveDelay = 0.1f;
 	[SerializeField] private float launchForceY = 8f;
 
 	[Header("Physics Layers")]
@@ -29,6 +29,9 @@ public class PlayerClone : MonoBehaviour
 	private bool isOnLadder = false;
 
 	private Vector3 targetPosition;
+	private GameObject currentPlatform = null; // Platform reference for drop logic
+	private bool waitForFirstStep = true; // Wait until player makes next valid move
+
 
 	private void OnEnable()
 	{
@@ -44,15 +47,26 @@ public class PlayerClone : MonoBehaviour
 	{
 		replayMoves = new List<string>(moves);
 		targetPosition = transform.position;
+		currentMoveIndex = 0; // Start from first step
+		waitForFirstStep = true; // Delay replay until next step
+
 	}
 
 	private void OnPlayerStep()
 	{
+		// Wait for first step before starting replay
+		if (waitForFirstStep)
+		{
+			waitForFirstStep = false;
+			return;
+		}
+
 		if (!isReplaying && currentMoveIndex < replayMoves.Count)
 		{
 			StartCoroutine(ReplayStep());
 		}
 	}
+
 
 	private IEnumerator ReplayStep()
 	{
@@ -73,6 +87,7 @@ public class PlayerClone : MonoBehaviour
 		}
 		else if (move == "up")
 		{
+			// Check stair base before launching up
 			if (isOnStairBase)
 			{
 				rb.velocity = Vector2.zero;
@@ -88,6 +103,16 @@ public class PlayerClone : MonoBehaviour
 		}
 		else if (move == "down")
 		{
+			// Drop through platform like player
+			if (currentPlatform != null)
+			{
+				PlatformOnLadder platform = currentPlatform.GetComponent<PlatformOnLadder>();
+				if (platform != null)
+				{
+					platform.DropPlayer(); // Disable collision to drop
+				}
+			}
+
 			rb.AddForce(Vector2.down * 0.05f, ForceMode2D.Impulse);
 			currentMoveIndex++;
 			yield return new WaitForSeconds(moveDelay);
@@ -95,6 +120,7 @@ public class PlayerClone : MonoBehaviour
 			yield break;
 		}
 
+		// Horizontal movement
 		animator.SetBool("IsMove", true);
 		targetPosition = transform.position + direction;
 		isMoving = true;
@@ -135,6 +161,27 @@ public class PlayerClone : MonoBehaviour
 		if (collision.CompareTag("Ladder"))
 		{
 			isOnLadder = false;
+		}
+	}
+
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (collision.gameObject.CompareTag("PlatformOnLadder"))
+		{
+			ContactPoint2D[] contacts = new ContactPoint2D[1];
+			collision.GetContacts(contacts);
+			if (contacts[0].normal.y > 0.5f)
+			{
+				currentPlatform = collision.gameObject;
+			}
+		}
+	}
+
+	private void OnCollisionExit2D(Collision2D collision)
+	{
+		if (collision.gameObject == currentPlatform)
+		{
+			currentPlatform = null;
 		}
 	}
 }
