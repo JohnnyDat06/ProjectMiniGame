@@ -50,19 +50,21 @@ public class PlayerGridMovement : MonoBehaviour
 			Movement();
 		}
 
+		// Climb stair upward
 		if (isOnStairBase && Input.GetAxisRaw("Vertical") > 0)
 		{
 			LaunchUp();
+
+			// Record step and notify clone immediately
 			RecordMove("up");
-			ArrowManager.Instance.OnArrowButtonPressed(ArrowDirection.Up); // Notify UI arrow button
+			PlayerStep();
+
+			ArrowManager.Instance.OnArrowButtonPressed(ArrowDirection.Up);
 		}
 
 		UpdateAnimation();
 	}
 
-	/// <summary>
-	/// Handles left/right movement in grid steps
-	/// </summary>
 	private void Movement()
 	{
 		float horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -75,19 +77,22 @@ public class PlayerGridMovement : MonoBehaviour
 			if (CanMove(direction))
 			{
 				targetPosition = transform.position + direction;
+
+				// Record the move BEFORE starting coroutine
+				RecordMove(horizontalInput < 0 ? "left" : "right");
+				PlayerStep();
+
 				StartCoroutine(MoveToTargetPosition());
 
-				// set UI arrow buttons
+				// Arrow UI
 				if (horizontalInput < 0)
 				{
 					ArrowManager.Instance.OnArrowButtonPressed(ArrowDirection.Left);
-				}	
+				}
 				if (horizontalInput > 0)
 				{
 					ArrowManager.Instance.OnArrowButtonPressed(ArrowDirection.Right);
 				}
-
-				RecordMove(horizontalInput < 0 ? "left" : "right");
 			}
 			else
 			{
@@ -103,14 +108,20 @@ public class PlayerGridMovement : MonoBehaviour
 				platform.DropPlayer();
 				playerRigidbody.AddForce(Vector2.down * 0.05f, ForceMode2D.Impulse);
 
+				// Gọi ngay sau khi rơi
+				PlayerStep();
+
+				//Chỉ ghi bước nếu đã qua cooldown
 				if (Time.time - lastDownTime > downRecordCooldown)
 				{
 					RecordMove("down");
-					ArrowManager.Instance.OnArrowButtonPressed(ArrowDirection.Down); // Notify UI arrow button
+					ArrowManager.Instance.OnArrowButtonPressed(ArrowDirection.Down);
 					lastDownTime = Time.time;
 				}
 			}
 		}
+
+
 	}
 
 	private IEnumerator MoveToTargetPosition()
@@ -131,14 +142,8 @@ public class PlayerGridMovement : MonoBehaviour
 
 		yield return new WaitForSeconds(moveDelay);
 		canMove = true;
-
-		PlayerStep(); // Notify the clone!
-
 	}
 
-	/// <summary>
-	/// Check for obstacles before moving
-	/// </summary>
 	private bool CanMove(Vector3 direction)
 	{
 		float checkDistance = 1f;
@@ -241,9 +246,6 @@ public class PlayerGridMovement : MonoBehaviour
 		}
 	}
 
-	/// <summary>
-	/// Record a movement step (maxSteps limited)
-	/// </summary>
 	private void RecordMove(string move)
 	{
 		if (moveHistory.Count >= maxSteps) return;
