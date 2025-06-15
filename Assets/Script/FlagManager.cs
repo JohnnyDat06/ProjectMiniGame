@@ -7,6 +7,7 @@ public class FlagManager : MonoBehaviour
     [SerializeField] Animator animatorFlag;
 
     [SerializeField] private float sceneChangeDelay = 3f;
+    [SerializeField] private GameObject limitMap;
 
     private bool hasTriggered = false;
 
@@ -15,7 +16,12 @@ public class FlagManager : MonoBehaviour
         if (!hasTriggered && collision.CompareTag("Player"))
         {
             hasTriggered = true;
-
+            if (limitMap != null)
+            {
+                limitMap.layer = LayerMask.NameToLayer("Obstacle");
+                limitMap.SetActive(true);             
+            }
+                          
             if (animatorFlag != null)
             {
                 animatorFlag.SetInteger("State", 1);

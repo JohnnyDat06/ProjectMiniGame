@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8287219483768268861}
   - component: {fileID: 7621687709144963055}
   - component: {fileID: 8006146583878874104}
+  - component: {fileID: 2871103170494476706}
   m_Layer: 0
   m_Name: PlayerClone
   m_TagString: Player
@@ -203,3 +204,15 @@ MonoBehaviour:
   animator: {fileID: 7621687709144963055}
   spriteRenderer: {fileID: 6897973207587144727}
   playerCollider: {fileID: 8287219483768268861}
+--- !u!114 &2871103170494476706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4057753433568330873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91442dc6e309ced43a7a20860a83f641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

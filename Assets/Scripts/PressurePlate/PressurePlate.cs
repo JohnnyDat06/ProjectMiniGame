@@ -15,27 +15,29 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other == null || other.gameObject == null) return;
+
         if (other.CompareTag("Player"))
         {
             playersOnPlate++;
-            animator.SetBool("Pressed", true);
-            tilemapToToggle?.SetActive(false);
+            if (animator != null) animator.SetBool("Pressed", true);
+            if (tilemapToToggle != null) tilemapToToggle?.SetActive(false);
 
-            // Phát âm thanh tại vị trí hiện tại
-            if (pressSound != null)
-                AudioSource.PlayClipAtPoint(pressSound, transform.position);
+            if (pressSound != null) AudioSource.PlayClipAtPoint(pressSound, transform.position);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        if (other == null || other.gameObject == null) return;
+
         if (other.CompareTag("Player"))
         {
             playersOnPlate = Mathf.Max(0, playersOnPlate - 1);
             if (playersOnPlate == 0)
             {
-                animator.SetBool("Pressed", false);
-                tilemapToToggle?.SetActive(true);
+                if(animator != null) animator.SetBool("Pressed", false);
+                if (tilemapToToggle != null) tilemapToToggle?.SetActive(true);
             }
         }
     }
