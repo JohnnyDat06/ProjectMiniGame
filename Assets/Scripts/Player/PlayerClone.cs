@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Clone logic: replays recorded 2D grid movement with animation and platform/stair interaction.
+/// Clone logic: plays back recorded 2D grid movement with animation and stair climbing
 /// </summary>
 public class PlayerClone : MonoBehaviour
 {
 	[Header("Settings")]
 	[SerializeField] private float moveSpeed = 5f;
-	[SerializeField] private float moveDelay = 0.1f;
+	[SerializeField] private float moveDelay = 0.5f;
 	[SerializeField] private float launchForceY = 8f;
 
 	[Header("Physics Layers")]
@@ -27,10 +27,8 @@ public class PlayerClone : MonoBehaviour
 	private bool isMoving = false;
 	private bool isOnStairBase = false;
 	private bool isOnLadder = false;
-	private bool waitForFirstStep = true;
 
 	private Vector3 targetPosition;
-	private GameObject currentPlatform = null;
 
 	private void OnEnable()
 	{
@@ -46,18 +44,10 @@ public class PlayerClone : MonoBehaviour
 	{
 		replayMoves = new List<string>(moves);
 		targetPosition = transform.position;
-		currentMoveIndex = 0;
-		waitForFirstStep = true;
 	}
 
 	private void OnPlayerStep()
 	{
-		if (waitForFirstStep)
-		{
-			waitForFirstStep = false;
-			return;
-		}
-
 		if (!isReplaying && currentMoveIndex < replayMoves.Count)
 		{
 			StartCoroutine(ReplayStep());
@@ -70,8 +60,6 @@ public class PlayerClone : MonoBehaviour
 
 		string move = replayMoves[currentMoveIndex];
 		Vector3 direction = Vector3.zero;
-
-		Debug.Log($"▶ Clone step [{currentMoveIndex}] = {move}");
 
 		if (move == "left")
 		{
@@ -91,43 +79,16 @@ public class PlayerClone : MonoBehaviour
 				rb.AddForce(Vector2.up * launchForceY, ForceMode2D.Impulse);
 				animator.SetTrigger("IsClimb");
 				isOnStairBase = false;
-				currentMoveIndex++;
-			}
-			else
-			{
-				Debug.LogWarning("⛔ Clone cannot climb - not on stair base.");
-				currentMoveIndex++; // skip this move
 			}
 
+			currentMoveIndex++;
 			yield return new WaitForSeconds(moveDelay);
 			isReplaying = false;
 			yield break;
 		}
 		else if (move == "down")
 		{
-			RaycastHit2D hit = Physics2D.Raycast(transform.position + Vector3.down * 0.1f, Vector2.down, 0.2f, obstacleLayer);
-
-			if (hit.collider != null && hit.collider.CompareTag("PlatformOnLadder"))
-			{
-				rb.velocity = Vector2.zero;
-				rb.AddForce(Vector2.down * 0.05f, ForceMode2D.Impulse);
-				Debug.Log("✅ Clone drops down.");
-			}
-			else
-			{
-				Debug.LogWarning("⛔ Clone can't drop down. Skipping this step.");
-				// Even if drop failed, skip the move and continue
-			}
-
-			currentMoveIndex++; // Always skip after one attempt
-			yield return new WaitForSeconds(moveDelay);
-			isReplaying = false;
-			yield break;
-		}
-
-		if (direction == Vector3.zero)
-		{
-			Debug.LogWarning("⚠️ Invalid move direction, skipping movement.");
+			rb.AddForce(Vector2.down * 0.05f, ForceMode2D.Impulse);
 			currentMoveIndex++;
 			yield return new WaitForSeconds(moveDelay);
 			isReplaying = false;
@@ -155,34 +116,25 @@ public class PlayerClone : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.CompareTag("StairBase")) isOnStairBase = true;
-		if (collision.CompareTag("Ladder")) isOnLadder = true;
+		if (collision.CompareTag("StairBase"))
+		{
+			isOnStairBase = true;
+		}
+		if (collision.CompareTag("Ladder"))
+		{
+			isOnLadder = true;
+		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		if (collision.CompareTag("StairBase")) isOnStairBase = false;
-		if (collision.CompareTag("Ladder")) isOnLadder = false;
-	}
-
-	private void OnCollisionEnter2D(Collision2D collision)
-	{
-		if (collision.gameObject.CompareTag("PlatformOnLadder"))
+		if (collision.CompareTag("StairBase"))
 		{
-			ContactPoint2D[] contacts = new ContactPoint2D[1];
-			collision.GetContacts(contacts);
-			if (contacts[0].normal.y > 0.5f)
-			{
-				currentPlatform = collision.gameObject;
-			}
+			isOnStairBase = false;
 		}
-	}
-
-	private void OnCollisionExit2D(Collision2D collision)
-	{
-		if (collision.gameObject == currentPlatform)
+		if (collision.CompareTag("Ladder"))
 		{
-			currentPlatform = null;
+			isOnLadder = false;
 		}
 	}
 }
